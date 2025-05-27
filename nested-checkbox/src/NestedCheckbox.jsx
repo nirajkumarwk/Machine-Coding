@@ -29,20 +29,24 @@ const CheckboxesData = [
 ];
 
 const Checkboxes = ({ data, checkedItems, setCheckedItems }) => {
+    
   const handleCheckbox = (isChecked, node) => {
     console.log("nodeid", node.id);
     setCheckedItems((prev) => {
       const newState = { ...prev, [node.id]: isChecked };
 
       const updateChildren = (node) => {
-        node.children?.forEach((child) => {
+        node?.children?.forEach((child) => {
           newState[child.id] = isChecked;
           child.children && updateChildren(child);
         });
       };
 
       updateChildren(node);
-      console.log("newSTate", newState);
+
+      
+
+        
       return newState;
     });
   };
