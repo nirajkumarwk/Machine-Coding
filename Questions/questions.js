@@ -700,3 +700,25 @@ var check = function (nums) {
 
 
 
+var longestSubArray = function (nums, k) {
+  let n = nums.length;
+  let longest = 0;
+
+  for(let i=0; i<n; i++) {
+    let sum = 0;
+    let length = 0
+    for(let j=i; j<n; j++) {
+        sum += nums[j];
+        length++;
+        if(sum === k) {
+            longest = Math.max(longest, length)
+        }
+    }
+  }
+  return longest;
+  
+};
+
+
+
+console.log(longestSubArray([1, 2, 3, 4, 5], 12))
