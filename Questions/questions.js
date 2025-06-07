@@ -842,3 +842,23 @@ var maxProfit = function (prices) {
   return maxProfit;
 };
 
+// Better Approach 
+
+var maxProfit = function(prices) {
+    let n = prices.length;
+    let maxProfit = 0;
+    let i =0;
+
+    for(let j=i; j<n; j++) {
+        let profit = prices[j] - prices[i];
+
+        if(profit > maxProfit) {
+            maxProfit = profit;
+        }
+        if(prices[j] < prices[i]) {
+            i = j;
+        }
+        
+    }
+    return maxProfit;
+};
