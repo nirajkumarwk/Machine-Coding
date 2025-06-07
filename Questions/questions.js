@@ -755,7 +755,7 @@ Constraints:
 Follow up: Could you minimize the total number of operations done? 
     
 */}
-
+// Brute Force
 var moveZeroes = function (nums) {
     let n = nums.length;
     let newArr = [];
@@ -770,6 +770,25 @@ var moveZeroes = function (nums) {
     }
 
     return newArr;
+};
+
+// Optimized approach
+
+var moveZeroes = function (nums) {
+  let n = nums.length;
+  let i = 0;
+
+  if (nums.length === 1) return nums;
+
+  for (let j = i; j < n; j++) {
+    if (nums[j] !== 0) {
+      if (i !== j) {
+        nums[i] = nums[j];
+        nums[j] = 0;
+      }
+      i++;
+    }
+  }
 };
 
 console.log(moveZeroes([0,1,0,3,12]));
