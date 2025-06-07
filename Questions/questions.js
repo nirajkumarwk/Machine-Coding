@@ -721,4 +721,55 @@ var longestSubArray = function (nums, k) {
 
 
 
-console.log(longestSubArray([1, 2, 3, 4, 5], 12))
+// console.log(longestSubArray([1, 2, 3, 4, 5], 12))
+
+
+
+
+{/* 
+    
+283. Move Zeroes
+
+Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+Note that you must do this in-place without making a copy of the array.
+
+ 
+
+Example 1:
+
+Input: nums = [0,1,0,3,12]
+Output: [1,3,12,0,0]
+Example 2:
+
+Input: nums = [0]
+Output: [0]
+ 
+
+Constraints:
+
+1 <= nums.length <= 104
+-231 <= nums[i] <= 231 - 1
+ 
+
+Follow up: Could you minimize the total number of operations done? 
+    
+*/}
+
+var moveZeroes = function (nums) {
+    let n = nums.length;
+    let newArr = [];
+
+    for(let i=0; i<n; i++) {
+        if(nums[i] !== 0) {
+            newArr.push(nums[i]);
+        }
+    };
+    for(let j=newArr.length; j<n; j++){
+        newArr.push(0);
+    }
+
+    return newArr;
+};
+
+console.log(moveZeroes([0,1,0,3,12]));
