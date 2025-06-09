@@ -1282,3 +1282,22 @@ var majorityElement = function (nums) {
   return arr;
 };
 
+// Better Approach
+
+var majorityElement = function (nums) {
+    let n = nums.length;
+    let map = new Map();
+    let freq = 0;
+    let arr = [];
+
+    for(let i=0; i<n; i++) {
+        map.set(nums[i], (map.get(nums[i]) || 0) + 1);
+    }
+
+    for(const [key, value] of map) {
+        if(value > n/3) {
+            arr.push(key);
+        }
+    }
+    return arr;
+}
