@@ -1081,30 +1081,28 @@ Follow up: Can you come up with an algorithm that runs in O(m + n) time?
 */}
 
 
-// var merge = function (nums1, m, nums2, n) {
-//   let size = m + n - 1;
-//   let i = m - 1;
-//   let j = n - 1;
+var merge = function (nums1, m, nums2, n) {
+  let size = m + n - 1;
+  let i = m - 1;
+  let j = n - 1;
 
-//   while (i >= 0 && j >= 0) {
-//     if (nums1[i] < nums2[j]) {
-//       nums1[size] = nums2[j];
-//       j--;
-//     } else {
-//       nums1[size] = nums1[i];
-//       i--;
-//     }
-//     size--;
-//   }
+  while (i >= 0 && j >= 0) {
+    if (nums1[i] < nums2[j]) {
+      nums1[size] = nums2[j];
+      j--;
+    } else {
+      nums1[size] = nums1[i];
+      i--;
+    }
+    size--;
+  }
 
-//   while (j >= 0) {
-//     nums1[size] = nums2[j];
-//     j--;
-//     size--;
-//   }
-// };
-
-
+  while (j >= 0) {
+    nums1[size] = nums2[j];
+    j--;
+    size--;
+  }
+};
 
 
 
@@ -1228,3 +1226,59 @@ var majorityElement = function (nums) {
     }
     return ans;
 }
+
+
+
+
+{/* 
+   229. Majority Element II
+
+Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times.
+
+ 
+
+Example 1:
+
+Input: nums = [3,2,3]
+Output: [3]
+Example 2:
+
+Input: nums = [1]
+Output: [1]
+Example 3:
+
+Input: nums = [1,2]
+Output: [1,2]
+ 
+
+Constraints:
+
+1 <= nums.length <= 5 * 104
+-109 <= nums[i] <= 109
+ 
+
+Follow up: Could you solve the problem in linear time and in O(1) space? 
+    
+    */}
+
+
+// Brute Force 
+
+var majorityElement = function (nums) {
+  let n = nums.length;
+  let arr = [];
+
+  for (let i = 0; i < n; i++) {
+    let freq = 0;
+    for (let j = 0; j < n; j++) {
+      if (nums[i] === nums[j]) {
+        freq++;
+      }
+    }
+    if (freq > n / 3 && !arr.includes(nums[i])) {
+      arr.push(nums[i]);
+    }
+  }
+  return arr;
+};
+
