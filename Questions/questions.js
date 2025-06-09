@@ -1207,3 +1207,24 @@ var majorityElement = function (nums) {
     }
   }
 };
+
+// Optimal Approach
+
+var majorityElement = function (nums) {
+    let n = nums.length;
+    let freq = 0;
+    let ans = 0;
+
+    for(let i=0; i<n; i++) {
+        if(freq === 0){
+            ans = nums[i];
+        }
+
+        if(nums[i] === ans) {
+            freq++;
+        } else {
+            freq--;
+        }
+    }
+    return ans;
+}
