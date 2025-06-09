@@ -1081,25 +1081,112 @@ Follow up: Can you come up with an algorithm that runs in O(m + n) time?
 */}
 
 
+// var merge = function (nums1, m, nums2, n) {
+//   let size = m + n - 1;
+//   let i = m - 1;
+//   let j = n - 1;
+
+//   while (i >= 0 && j >= 0) {
+//     if (nums1[i] < nums2[j]) {
+//       nums1[size] = nums2[j];
+//       j--;
+//     } else {
+//       nums1[size] = nums1[i];
+//       i--;
+//     }
+//     size--;
+//   }
+
+//   while (j >= 0) {
+//     nums1[size] = nums2[j];
+//     j--;
+//     size--;
+//   }
+// };
+
+
+
+
+
+
+
 var merge = function (nums1, m, nums2, n) {
-  let size = m + n - 1;
-  let i = m - 1;
-  let j = n - 1;
+  let k = m + n - 1;
+  let i = 0;
+  let j = 0;
+  let newArr = [];
 
-  while (i >= 0 && j >= 0) {
-    if (nums1[i] < nums2[j]) {
-      nums1[size] = nums2[j];
-      j--;
+  while (i < m && j < n) {
+    if (nums1[i] > nums2[j]) {
+      newArr.push(nums2[j]);
+      j++;
     } else {
-      nums1[size] = nums1[i];
-      i--;
+      newArr.push(nums1[i]);
+      i++;
     }
-    size--;
   }
 
-  while (j >= 0) {
-    nums1[size] = nums2[j];
-    j--;
-    size--;
+  while (i < m) {
+    newArr.push(nums1[i]);
+    i++;
   }
+
+  while (j < n) {
+    newArr.push(nums2[j]);
+    j++;
+  }
+
+  return newArr;
+};
+
+
+
+{ /* 
+   169. Majority Element
+
+Given an array nums of size n, return the majority element.
+
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+
+ 
+
+Example 1:
+
+Input: nums = [3,2,3]
+Output: 3
+Example 2:
+
+Input: nums = [2,2,1,1,1,2,2]
+Output: 2
+ 
+
+Constraints:
+
+n == nums.length
+1 <= n <= 5 * 104
+-109 <= nums[i] <= 109
+ 
+
+Follow-up: Could you solve the problem in linear time and in O(1) space? 
+    
+    
+*/}
+
+// Brute Force
+
+var majorityElement = function (nums) {
+    let n = nums.length;
+
+    if (nums.length === 1) return nums[0];
+
+    for (let i = 0; i < n; i++) {
+        let count = 0;
+        for (let j = 0; j < n; j++) {
+            if (nums[i] === nums[j]) {
+                count++;
+            }
+
+        }
+        if (count > Math.floor(n / 2)) return nums[i]
+    }
 };
