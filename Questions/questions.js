@@ -1190,3 +1190,20 @@ var majorityElement = function (nums) {
         if (count > Math.floor(n / 2)) return nums[i]
     }
 };
+
+// Better Approach
+
+var majorityElement = function (nums) {
+  let n = nums.length;
+  let map = new Map();
+
+  for (let i = 0; i < n; i++) {
+    map.set(nums[i], (map.get(nums[i]) || 0) + 1);
+  }
+
+  for (const [key, value] of map) {
+    if (value > Math.floor(n / 2)) {
+      return key;
+    }
+  }
+};
