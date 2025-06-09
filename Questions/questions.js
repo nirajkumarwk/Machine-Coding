@@ -1285,19 +1285,78 @@ var majorityElement = function (nums) {
 // Better Approach
 
 var majorityElement = function (nums) {
-    let n = nums.length;
-    let map = new Map();
-    let freq = 0;
-    let arr = [];
+  let n = nums.length;
+  let map = new Map();
+  let freq = 0;
+  let arr = [];
 
-    for(let i=0; i<n; i++) {
-        map.set(nums[i], (map.get(nums[i]) || 0) + 1);
+  for (let i = 0; i < n; i++) {
+    map.set(nums[i], (map.get(nums[i]) || 0) + 1);
+  }
+
+  for (const [key, value] of map) {
+    if (value > n / 3) {
+      arr.push(key);
     }
+  }
+  return arr;
+};
 
-    for(const [key, value] of map) {
-        if(value > n/3) {
-            arr.push(key);
+
+
+
+function majorityElement1(v) {
+    const n = v.length; // size of the array
+    const ls = []; // list of answers
+
+    // declaring a map:
+    const mpp = new Map();
+
+    // least occurrence of the majority element:
+    const mini = Math.floor(n / 3) + 1;
+
+    // storing the elements with its occurrence:
+    for (let i = 0; i < n; i++) {
+        if (mpp.has(v[i])) {
+            mpp.set(v[i], mpp.get(v[i]) + 1);
+        } else {
+            mpp.set(v[i], 1);
         }
+
+        // checking if v[i] is the majority element:
+        if (mpp.get(v[i]) == mini) {
+            ls.push(v[i]);
+        }
+        if (ls.length == 2) break;
     }
-    return arr;
+
+    return ls;
 }
+
+const arr = [2,2];
+const ans = majorityElement1(arr);
+console.log(ans);
+
+
+
+// Another Better Approach
+
+var majorityElement = function (nums) {
+  let n = nums.length;
+  let map = new Map();
+  let min = Math.floor(n / 3) + 1;
+  let arr = [];
+
+  for (let i = 0; i < n; i++) {
+    if (map.has(nums[i])) {
+      map.set(nums[i], map.get(nums[i]) + 1);
+    } else {
+      map.set(nums[i], 1);
+    }
+    if (map.get(nums[i]) == min) {
+      arr.push(nums[i]);
+    }
+    if (arr.length == 2) break;
+  }
+  return arr;
+};
