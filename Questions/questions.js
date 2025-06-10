@@ -1360,3 +1360,46 @@ var majorityElement = function (nums) {
   }
   return arr;
 };
+
+
+// Optimal Approach
+
+var majorityElement = function (nums) {
+    let n = nums.length;
+    let count1 = 0, count2 = 0;
+    let el1 = null, el2 = null;
+
+    for (let i = 0; i < n; i++) {
+        if (el1 === nums[i]) {
+            count1++;
+        } else if (el2 === nums[i]) {
+            count2++;
+        } else if (count1 === 0) {
+            el1 = nums[i];
+            count1 = 1;
+        } else if (count2 === 0) {
+            el2 = nums[i];
+            count2 = 1;
+        } else {
+            count1--;
+            count2--;
+        }
+    }
+
+    // Second pass: verify counts
+    count1 = 0;
+    count2 = 0;
+
+    for (let i = 0; i < n; i++) {
+        if (nums[i] === el1) count1++;
+        else if (nums[i] === el2) count2++; // use else-if to avoid double counting
+    }
+
+    let mini = Math.floor(n / 3) + 1;
+    let res = [];
+
+    if (count1 >= mini) res.push(el1);
+    if (count2 >= mini) res.push(el2);
+
+    return res;
+};
