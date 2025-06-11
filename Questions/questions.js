@@ -1480,3 +1480,28 @@ var threeSum = function (nums) {
     return arr;
 }
 
+// Better Solution
+
+var threeSum = function (nums) {
+    let n = nums.length;
+    let seen = new Set();
+    let arr = [];
+
+    for(let i=0; i<n-2; i++) {
+        let set = new Set();
+        for(let j=i+1; j<n; j++) {
+            let third = -(nums[i] + nums[j]);
+            if(set.has(third)) {
+                let triplet = [nums[i], nums[j], third];
+                triplet.sort((a, b) => a - b);
+                let key = triplet.join(',');
+                if(!seen.has(key)){
+                    seen.add(key);
+                    arr.push(triplet);
+                }
+            }
+            set.add(nums[j])
+        }
+    }
+    return arr;
+}
